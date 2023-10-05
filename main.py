@@ -32,12 +32,13 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.distributions.categorical import Categorical
 from torch.utils.tensorboard import SummaryWriter
+from torchsummary import summary
 
 # import notebook functions
 import import_ipynb
 from environment_creator import vectorize_env
 from Agent_class import Agent
-from Agent_utils import anneal, update_agent, GAE, train_agent
+from Agent_utils import anneal, update_agent, GAE, PPO_train_agent
 
 """# PARSER ISSUE
 **Importing the parse_args() function from an another notebook doesn't work, so you need to define the function just ubove the main**
@@ -151,7 +152,9 @@ if __name__ == "__main__":
 
   # Agent setup
   agent = Agent(envs).to(device)
+  agent.print_summary(envs)
   optimizer = optim.Adam(agent.parameters(), lr=args.learning_rate, eps=1e-5)
+
 
   # initializing things
   # ALGO Logic: Storage setup
@@ -212,7 +215,7 @@ if __name__ == "__main__":
                                       b_obs, b_actions,b_logprobs,\
                                       b_advantages, b_returns, b_values)
 
-## ----------------------------------- UPDATE TENSORBOARD -----------------------------------------
+## --------------------------------- UPDATING AND CLOSING UP -----------------------------------------
     y_pred, y_true = b_values.cpu().numpy(), b_returns.cpu().numpy()
     var_y = np.var(y_true)
     explained_var = np.nan if var_y == 0 else 1 - np.var(y_true - y_pred) / var_y
@@ -226,9 +229,14 @@ if __name__ == "__main__":
     writer.add_scalar("losses/approx_kl", approx_kl.item(), global_step)
     writer.add_scalar("losses/clipfrac", np.mean(clipfracs), global_step)
     writer.add_scalar("losses/explained_variance", explained_var, global_step)
-    print("SPS:", int(global_step / (time.time() - start_time)))
+    #print("SPS:", int(global_step / (time.time() - start_time)))
     writer.add_scalar("charts/SPS", int(global_step / (time.time() - start_time)), global_step)
 
   envs.close()
   writer.close()
+
+#save model and reload it
+model_path = os.getcwd() + '/trained_model'
+torch.save(agent, model_path)
+trained_agent = torch.load(model_path)
 

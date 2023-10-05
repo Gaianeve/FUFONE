@@ -92,12 +92,14 @@ def GAE(gae_v, gae_lambda_v, gamma_v, agent_v,\
 
   return returns_v, advantages_v
 
-"""## Training loop
-We also added kl divergence. In a nutshell it's a simple way to understand how aggressive the policy updates. Further details about the calculation can be found [here](http://joschu.net/blog/kl-approx.html).
+"""## PPO training loop
+Training loop with PPO algorithm.
+
+We added kl divergence, that, in a nutshell, it's a simple way to understand how aggressive the policy updates. Further details about the calculation can be found [here](http://joschu.net/blog/kl-approx.html).
 
 """
 
-def train_agent(batch_size, update_epochs, minibatch_size, clip_coef, norm_adv, clip_vloss,\
+def PPO_train_agent(batch_size, update_epochs, minibatch_size, clip_coef, norm_adv, clip_vloss,\
                 ent_coef, vf_coef, max_grad_norm, target_kl, \
                 agent_v, optimizer_v,\
                 b_obs_v, b_actions_v,b_logprobs_v, b_advantages_v, b_returns_v, b_values_v):

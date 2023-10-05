@@ -15,6 +15,9 @@ import numpy as np
 import torch
 import torch.nn as nn
 from torch.distributions.categorical import Categorical
+from torchsummary import summary
+import gym
+from datetime import datetime
 
 # init layer
 def layer_init(layer, std=np.sqrt(2), bias_const=0.0):
@@ -50,4 +53,34 @@ class Agent(nn.Module):
       if action is None:
           action = probs.sample()
       return action, probs.log_prob(action), probs.entropy(), self.critic(x)
+
+  # NN summary
+  def print_summary(self, envs):
+    print('Actor summary')
+    print(summary(self.actor, envs.single_observation_space.shape))
+    print('Critic summary')
+    print(summary(self.critic, envs.single_observation_space.shape))
+
+  def get_parameters(self):
+    #useful if wanting to check the updating of NN parameters
+    for name, param in self.named_parameters():
+      print(name, param.data)
+
+  # checkpoints
+  def get_checkpoint_name(epoch_v):
+    now = datetime.now()
+    today = now.strftime("%Y_%m_%d_%H_%M_%S")
+    check_name = 'checkpoint' + '_' + str(epoch_v) + '_' + today
+    return check_name
+
+  def checkpoint(self, epoch_v):
+    checkpoint_name = get_checkpoint_name(epoch_v)
+    path = os.getcwd() + '/' + checkpoint_name
+    torch.save(self, path)
+
+  def resume_from_checkpoint(self, path):
+    print("=> loading checkpoint '{}'".format(path))
+    return torch.load(path)
+
+
 
