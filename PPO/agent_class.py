@@ -91,7 +91,7 @@ class Agent(nn.Module):
     return torch.load(path)
 
   def save_agent(self, file_name):
-     directory = os.getcwd() + '/' + 'models/'
+    directory = os.getcwd() + '/' + 'models/'
     #if it doesn't exists, then create it
     if not os.path.exists(directory):
       os.mkdir(directory)
