@@ -15,16 +15,16 @@ Let's try to simulate our Cart-Pole, and train a model to control it. The algori
 Start by installing the library and logging in to your free account.
 """
 
-!pip install wandb -qU
+#!pip install wandb -qU
 # Log in to your W&B account
 import wandb
-wandb.login()
+#wandb.login()
 
 """## Installing libraries 📚"""
 
 # useful for import notebook
-!pip install import-ipynb
-!pip install gym==0.25.2
+#!pip install import-ipynb
+#!pip install gym==0.25.2
 #needed from March
 !pip install numpy==1.23.5
 
@@ -36,15 +36,15 @@ import os
 content_dir = os.getcwd()
 
 #cloning Fufi repo from git
-!git clone https://github.com/Gaianeve/gym-Fufi.git
+#!git clone https://github.com/Gaianeve/gym-Fufi.git
 #installing things
-!pip install /content/gym-Fufi
+#!pip install /content/gym-Fufi
 
 # Commented out IPython magic to ensure Python compatibility.
 # Enter the environment directory
 # %cd /content/gym-Fufi
 # Actually importing the library for our environment
-import gym_Fufi
+#import gym_Fufi
 
 # Commented out IPython magic to ensure Python compatibility.
 #get back to content directory so I save everything there
@@ -76,7 +76,7 @@ Loading files directly from git, so I don't have to upload it by hand.
 """
 
 #get files from git
-!git clone https://github.com/Gaianeve/FUFONE.git
+#!git clone https://github.com/Gaianeve/FUFONE.git
 
 """### 🐨 In case you are in `content` directory and need to cancel the repo, just type:
 ```
@@ -89,10 +89,10 @@ shutil.rmtree('FUFONE')
 """
 
 #check which directory I'm in
-!pwd
+#!pwd
 
 # Commented out IPython magic to ensure Python compatibility.
-!pwd
+#!pwd
 # %cd FUFONE/PPO
 from environment import vectorize_env
 from agent_class import Agent
