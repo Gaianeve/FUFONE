@@ -260,6 +260,7 @@ def main():
           if item is not None:
             #print(f"global_step={global_step}, episodic_return={item['r']}")
             writer.add_scalar("charts/episodic_return", item["r"], global_step)
+            wandb.log({"episodic_return": item["r"], "global_step": global_step}) 
             writer.add_scalar("charts/episodic_length", item["l"], global_step)
 
     # general advantages estimation
