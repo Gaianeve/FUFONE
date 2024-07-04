@@ -10,7 +10,7 @@ Original file is located at
 Let's try to simulate our Cart-Pole, and train a model to control it. The algorithm to do that is the CleanRL PPO, explained at [this youtube video ](https://www.youtube.com/watch?v=MEt6rrxH8W4).
 
 ## W&B Setup
-🪄 Install `wandb` library and login
+#🪄 Install `wandb` library and login
 
 Start by installing the library and logging in to your free account.
 """
@@ -26,14 +26,14 @@ import wandb
 #!pip install import-ipynb
 #!pip install gym==0.25.2
 #needed from March
-!pip install numpy==1.23.5
+#!pip install numpy==1.23.5
 
 """## Setting things up for the environment 🌍 🪖"""
 
 import os
 
 #saving current directory just to be sure
-content_dir = os.getcwd()
+#content_dir = os.getcwd()
 
 #cloning Fufi repo from git
 #!git clone https://github.com/Gaianeve/gym-Fufi.git
@@ -49,7 +49,7 @@ content_dir = os.getcwd()
 # Commented out IPython magic to ensure Python compatibility.
 #get back to content directory so I save everything there
 # %cd ..
-!pwd
+#!pwd
 
 """## importing libraries and functions 📚
 
@@ -122,7 +122,7 @@ def parse_args():
         help="the learning rate of the optimizer")
     parser.add_argument("--seed", type=int, default=1,
         help="seed of the experiment")
-    parser.add_argument("--total-timesteps", type=int, default= 1000000,
+    parser.add_argument("--total-timesteps", type=int, default= 500000,
         help="total timesteps of the experiments")
     parser.add_argument("--torch-deterministic", type=lambda x: bool(strtobool(x)), default=True, nargs="?", const=True,
         help="if toggled, `torch.backends.cudnn.deterministic=False`")
@@ -135,7 +135,7 @@ def parse_args():
         help="the wandb's project name")
     parser.add_argument("--wandb-entity", type=str, default=None,
         help="the entity (team) of wandb's project")
-    parser.add_argument("--capture-video", type=lambda x: bool(strtobool(x)), default=False, nargs="?", const=True,
+    parser.add_argument("--capture-video", type=lambda x: bool(strtobool(x)), default=True, nargs="?", const=True,
         help="weather to capture videos of the agent performances (check out `videos` folder)")
     # Algorithm specific arguments
     parser.add_argument("--num-envs", type=int, default=8,
@@ -279,7 +279,7 @@ def main():
     b_values, b_returns = PPO_train_agent(args.batch_size, args.update_epochs, args.minibatch_size, \
                                       args.clip_coef, args.norm_adv, args.clip_vloss,\
                                       args.ent_coef, args.vf_coef, args.max_grad_norm, args.target_kl,\
-                                      agent, optimizer, scheduler, True,\
+                                      agent, optimizer, scheduler, False,\
                                       b_obs, b_actions,b_logprobs,\
                                       b_advantages, b_returns, b_values)
 
@@ -325,14 +325,14 @@ def main():
 saved model goes into the directory `'content/models'`, by the name you give the function
 """
 
-agent.save_agent('Fufettino')
+#agent.save_agent('Fufettino')
 
 """## Evaluation 🙏 🛕 ⛩ ⛪
 
 """
 
-mean_ev, std_ev = evaluate_agent(args.gym_id, args.seed, run_name, device, agent)
-print('evaluation test:')
-print(mean_ev)
-print(std_ev)
+#mean_ev, std_ev = evaluate_agent(args.gym_id, args.seed, run_name, device, agent)
+#print('evaluation test:')
+#print(mean_ev)
+#print(std_ev)
 
