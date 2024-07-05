@@ -262,7 +262,7 @@ def main():
           if item is not None:
             #print(f"global_step={global_step}, episodic_return={item['r']}")
             writer.add_scalar("charts/episodic_return", item["r"], global_step)
-            sum_episodes += item["r"]
+            sum_episodes = sum_episodes + item["r"]
             writer.add_scalar("charts/episodic_length", item["l"], global_step)
 
     # general advantages estimation
@@ -305,6 +305,8 @@ def main():
 
 
 # log on W&B the sum of episodes returns
+  print('dissennatore')
+  print(sum_episodes)
   wandb.log({"episodic_return_sum": sum_episodes}) 
 ## -------------------------------------- Log video to W&B ---------------------------------------------------
   if args.capture_video:
