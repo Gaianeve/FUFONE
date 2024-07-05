@@ -305,7 +305,7 @@ def main():
 
 
 # log on W&B the sum of episodes returns
-  wandb.log({"episodic_return_sum": sum_episodes) 
+  wandb.log({"episodic_return_sum": sum_episodes}) 
 ## -------------------------------------- Log video to W&B ---------------------------------------------------
   if args.capture_video:
     video_files = [file for file in os.listdir(f"./videos/{run_name}") if file.endswith(".mp4")]
