@@ -265,6 +265,11 @@ def main():
             sum_episodes = sum_episodes + item["r"]
             writer.add_scalar("charts/episodic_length", item["l"], global_step)
             writer.add_scalar("charts/total_episodic_returns", sum_episodes, global_step)
+              
+            # log on W&B the sum of episodes returns
+            print('dissennatore')
+            print(sum_episodes)
+            wandb.log({"episodic_return_sum": sum_episodes}) 
 
     # general advantages estimation
     returns, advantages = GAE(args.gae, args.gae_lambda, args.gamma, agent,\
@@ -305,10 +310,7 @@ def main():
     writer.add_scalar("charts/SPS", int(global_step / (time.time() - start_time)), global_step)
 
 
-# log on W&B the sum of episodes returns
-  print('dissennatore')
-  print(sum_episodes)
-  wandb.log({"episodic_return_sum": sum_episodes}) 
+
 ## -------------------------------------- Log video to W&B ---------------------------------------------------
   if args.capture_video:
     video_files = [file for file in os.listdir(f"./videos/{run_name}") if file.endswith(".mp4")]
