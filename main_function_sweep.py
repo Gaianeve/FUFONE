@@ -239,7 +239,9 @@ def main():
   next_obs = torch.Tensor(envs.reset()).to(device)
   next_done = torch.zeros(args.num_envs).to(device)
   num_updates = args.total_timesteps // args.batch_size
-
+    
+  #sum of episodic returns
+  sum_episodes = 0
   for update in range(1, num_updates + 1):
     #print('Starting update {}'.format(update))
     # Annealing the rate if instructed to do so.
@@ -260,7 +262,7 @@ def main():
           if item is not None:
             #print(f"global_step={global_step}, episodic_return={item['r']}")
             writer.add_scalar("charts/episodic_return", item["r"], global_step)
-            wandb.log({"episodic_return": item["r"]}) 
+            sum_episodes += item["r"]
             writer.add_scalar("charts/episodic_length", item["l"], global_step)
 
     # general advantages estimation
@@ -301,6 +303,9 @@ def main():
     #print("SPS:", int(global_step / (time.time() - start_time)))
     writer.add_scalar("charts/SPS", int(global_step / (time.time() - start_time)), global_step)
 
+
+# log on W&B the sum of episodes returns
+  wandb.log({"episodic_return_sum": sum_episodes) 
 ## -------------------------------------- Log video to W&B ---------------------------------------------------
   if args.capture_video:
     video_files = [file for file in os.listdir(f"./videos/{run_name}") if file.endswith(".mp4")]
