@@ -187,7 +187,7 @@ def main():
   # weight and biases flag
   if args.track:
       import wandb
-
+      wandb.login()
       wandb.init(
           project=args.wandb_project_name,
           entity=args.wandb_entity,
