@@ -176,26 +176,26 @@ def parse_args():
 
 """## The instructions start from here 🚀"""
 
-def main():
+def main(args):
 ## ----------------------------------------- PARSER ------------------------------------------------
   # retrieve the parser
-  args = parse_args()
+  #args = parse_args()
   run_name = f"{args.gym_id}__{args.exp_name}__{args.seed}__{int(time.time())}"
 
 ## -------------------------------------- W&B, TENSORBOARD ----------------------------------------
 
   # weight and biases flag
-  if args.track:
-      import wandb
+  #if args.track:
+      #import wandb
 
-      wandb.init(
-          project=args.wandb_project_name,
-          entity=args.wandb_entity,
-          sync_tensorboard=True,
-          config=vars(args),
-          name=run_name,
-          save_code=True,
-      )
+      #wandb.init(
+          #project=args.wandb_project_name,
+          #entity=args.wandb_entity,
+          #sync_tensorboard=True,
+          #config=vars(args),
+          #name=run_name,
+          #save_code=True,
+      #)
 
   # tensorboard setup
   writer = SummaryWriter(f"runs/{run_name}")
