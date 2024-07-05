@@ -17,7 +17,7 @@ Start by installing the library and logging in to your free account.
 
 #!pip install wandb -qU
 # Log in to your W&B account
-#import wandb
+import wandb
 #wandb.login()
 
 """## Installing libraries 📚"""
@@ -176,10 +176,10 @@ def parse_args():
 
 """## The instructions start from here 🚀"""
 
-def main():
+def main(args):
 ## ----------------------------------------- PARSER ------------------------------------------------
   # retrieve the parser
-  args = parse_args()    
+  #args = parse_args()    
   run_name = f"{args.gym_id}__{args.exp_name}__{args.seed}__{int(time.time())}"
 
 ## -------------------------------------- W&B, TENSORBOARD ----------------------------------------
