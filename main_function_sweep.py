@@ -176,33 +176,33 @@ def parse_args():
 
 """## The instructions start from here 🚀"""
 
-def main(args):
+def main(args, run_name):
 ## ----------------------------------------- PARSER ------------------------------------------------
   # retrieve the parser
-  args = parse_args()
+  #args = parse_args()
     
 # Update args with sweep parameters
-  args.learning_rate = wandb.config.learning_rate
-  args.batch_size = wandb.config.batch_size
-  args.ent_coef = wandb.config.ent_coef
-  args.num_envs = wandb.config.num_envs
+  #args.learning_rate = wandb.config.learning_rate
+  #args.batch_size = wandb.config.batch_size
+  #args.ent_coef = wandb.config.ent_coef
+  #args.num_envs = wandb.config.num_envs
     
-  run_name = f"{args.gym_id}__{args.exp_name}__{args.seed}__{int(time.time())}"
+  #run_name = f"{args.gym_id}__{args.exp_name}__{args.seed}__{int(time.time())}"
 
 ## -------------------------------------- W&B, TENSORBOARD ----------------------------------------
 
   # weight and biases flag
-  if args.track:
-      import wandb
+  #if args.track:
+      #import wandb
 
-      wandb.init(
-          project=args.wandb_project_name,
-          entity=args.wandb_entity,
-          sync_tensorboard=True,
-          config=vars(args),
-          name=run_name,
-          save_code=True,
-      )
+      #wandb.init(
+          #project=args.wandb_project_name,
+          #entity=args.wandb_entity,
+          #sync_tensorboard=True,
+          #config=vars(args),
+          #name=run_name,
+          #save_code=True,
+      #)
 
   # tensorboard setup
   writer = SummaryWriter(f"runs/{run_name}")
@@ -318,7 +318,7 @@ def main(args):
         wandb.log({"episode_video": wandb.Video(video_path, fps=4, format="mp4")})
   envs.close()
   writer.close()
-  wandb.finish()
+  #wandb.finish()
 
 """## Tensorboard ✨
 
