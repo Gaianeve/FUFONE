@@ -264,6 +264,7 @@ def main():
             writer.add_scalar("charts/episodic_return", item["r"], global_step)
             sum_episodes = sum_episodes + item["r"]
             writer.add_scalar("charts/episodic_length", item["l"], global_step)
+            writer.add_scalar("charts/total_episodic_returns", sum_episodes, global_step)
 
     # general advantages estimation
     returns, advantages = GAE(args.gae, args.gae_lambda, args.gamma, agent,\
