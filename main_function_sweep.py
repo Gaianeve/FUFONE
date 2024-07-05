@@ -267,8 +267,8 @@ def main(args):
             writer.add_scalar("charts/total_episodic_returns", sum_episodes, global_step)
               
             # log on W&B the sum of episodes returns
-            print('dissennatore')
-            print(sum_episodes)
+            #print('dissennatore')
+            #print(sum_episodes)
             wandb.log({"episodic_return_sum": sum_episodes}) 
 
     # general advantages estimation
