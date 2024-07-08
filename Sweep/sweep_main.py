@@ -60,9 +60,6 @@ def get_default_hyperparameters_and_names():
   )
   return default_config
 
-#get default configuration
-default_config  = get_default_hyperparameters_and_names()
-
 def parse_args(default_config):
     parser = argparse.ArgumentParser()
 
