@@ -37,7 +37,7 @@ def get_default_hyperparameters_and_names():
       #W&B setup
       wandb_project_name ="Fufino",
       wandb_entity =None,
-      capture_video =True,
+      capture_video =False,
 
       #hyperparameters
       lr = 1.5e-4,
