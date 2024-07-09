@@ -42,7 +42,7 @@ def get_default_hyperparameters_and_names():
       #hyperparameters
       lr = 1.5e-4,
       seed = 1,
-      total_timesteps = 500000,
+      total_timesteps = 1000000,
       num_envs = 8,
       num_steps = 512,
       anneal_lr = True,
